@@ -1,0 +1,1 @@
+worker: python ucp_streaming_reply.py
