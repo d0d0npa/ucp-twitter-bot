@@ -5,14 +5,14 @@
 - [MediaWiki](https://pymediawiki.readthedocs.io/en/latest/index.html)
 
 ## 概要
-- ucp_tweet.py
+- `ucp_twitter_bot/ucp_tweet.py`
     - アンサイクロペディアの記事をランダムに選びツイートする
-- ucp_follower.py
-    - 自動フォロー、アンフォローする為のプログラム
-- ucp_reply.py
-    - Webhook(未実装)
+- `ucp_twitter_bot/ucp_follower.py@
+    - 自動フォローする為のプログラム
 - `ucp_twitter_bot/twitter_authentication.py`
     - twitterの認証を行う。共通ルーチンなので、ここにまとめた。
+- ucp_reply.py
+    - Webhook(未実装)
 - ucp_streaming_reply.py
     - 自動応答botのソースコード。とりあえず動く（はず）だが実用には耐えない状態（WIP）
 - ucp_tweet_liked.py
