@@ -1,0 +1,13 @@
+version: '3'
+services:
+  # Update this to the name of the service you want to work with in your docker-compose.yml file
+  dev:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+      args:
+        - USERNAME=${USERNAME}
+        - USER_UID=${USER_UID}
+
+    ports:
+      - "80:80"
