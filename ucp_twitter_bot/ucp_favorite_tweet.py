@@ -8,7 +8,7 @@ from ucp_twitter_bot import twitter_authentication
 
 # 取得したいキーワード
 SEARCH_WORD_LIST = ["アンサイクロペディア"]
-# 取得ツイート数３件
+# 取得ツイート数
 TWEET_ACQUISITION_COUNT = 100
 # 以下の文章のツイートはいいねしない
 TWEET_BLACK_LIST = ["「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題"]
@@ -50,7 +50,6 @@ def favorite_tweet():
                 ok_tweet_flag = False
 
         # いいね済はスルーする(そもそも、この項目なのか謎)
-        print("いいね済: ", tweet.favorited)
         if tweet.favorited:
             ok_tweet_flag = False
 
@@ -59,10 +58,10 @@ def favorite_tweet():
 
     for tweet in favorite_tweet_list:
         try:
-            # いいねの処理 #
+            # いいねの処理
             api.create_favorite(id=tweet.id)
-        # いいね済の場合はForbiddenされるので、ここで例外処理を行う
         except tweepy.errors.Forbidden as err:
+            # いいね済の場合はForbiddenされるので、ここで例外処理を行う
             print(err)
         except Exception as err:
             print(err)
