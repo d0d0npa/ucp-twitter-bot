@@ -60,7 +60,7 @@ def tweet_from_random_article() -> None:
 
 def sleep_random() -> None:
     """uniformな確率で処理を一時停止する（投稿時間をランダムにするため）"""
-    sleep_time = random.uniform(0, 500)
+    sleep_time = random.uniform(0, 420)
     sleep_time = round(sleep_time, 3)
     print("sleep time : ", sleep_time)
     time.sleep(sleep_time)
