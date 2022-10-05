@@ -7,7 +7,7 @@ name = "ucp_twitter_bot"
 description = "Package for UcpBot"
 license = {file = "LICENSE"}
 readme = "README.md"
-version = "0.0.3"
+version = "0.0.4"
 classifiers = [
   "Programming Language :: Python :: 3",
   "Development Status :: 1 - Alpha",
