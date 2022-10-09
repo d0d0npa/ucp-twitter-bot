@@ -1,9 +1,13 @@
 import tweepy
 
-from ucp_twitter_bot import twitter_authentication
+from ucptwitbot import twitter_authentication
 
 
 def following_follower_from_follower_list() -> None:
+    """
+    フォロワーリストよりフォローしていない人を探し、
+    フォローしていなければフォローする。
+    """
     api = twitter_authentication.set_authetication()
 
     for follower in tweepy.Cursor(api.get_followers).items():

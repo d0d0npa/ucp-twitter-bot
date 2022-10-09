@@ -3,7 +3,7 @@ import time
 
 import tweepy
 
-from ucp_twitter_bot import twitter_authentication
+from ucptwitbot import twitter_authentication
 
 
 # 取得したいキーワード
@@ -39,6 +39,9 @@ SLEEP_TIME = 2
 
 
 def favorite_tweet():
+    """
+    「アンサイクロペディア」に言及した場合はいいねを付与する
+    """
     api = twitter_authentication.set_authetication()
     search_result = []
     for search in SEARCH_WORD_LIST:

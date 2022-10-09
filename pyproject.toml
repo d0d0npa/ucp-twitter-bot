@@ -3,14 +3,15 @@ requires = ["setuptools","wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ucp_twitter_bot"
+name = "ucptwitbot"
 description = "Package for UcpBot"
 license = {file = "LICENSE"}
 readme = "README.md"
-version = "0.0.4"
+version = "0.0.5"
 classifiers = [
   "Programming Language :: Python :: 3",
-  "Development Status :: 1 - Alpha",
+  "Development Status :: 3 - Alpha",
+  "Natural Language :: Japanese",
   "License :: OSI Approved :: MIT License",
 ]
 requires-python = ">=3.10"
@@ -32,7 +33,7 @@ Source = "https://github.com/d0d0npa/ucp_bot"
 
 [tool.isort]
 profile = 'black'
-src_paths = ['ucp_twitter_bot']
+src_paths = ['ucptwitbot']
 line_length = 88
 lines_after_imports = 2
 force_single_line = true
@@ -46,8 +47,8 @@ line-length = 88
 target-version = ['py310']
 
 [tool.pytest.ini_options]
-pythonpath = ["ucp_twitter_bot"]
+pythonpath = ["ucptwitbot"]
 testpaths = ["tests"]
 
 [tool.coverage.run]
-source = ["ucp_twitter_bot"]
+source = ["ucptwitbot"]

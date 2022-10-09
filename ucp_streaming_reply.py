@@ -2,7 +2,7 @@
 
 import tweepy
 
-from ucp_twitter_bot import twitter_authentication
+from ucptwitbot import twitter_authentication
 
 
 class ReplyStreamListener(tweepy.StreamListener):
