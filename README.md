@@ -5,14 +5,21 @@
 - [MediaWiki](https://pymediawiki.readthedocs.io/en/latest/index.html)
 
 ## 概要
+ボットの有する機能は以下の通り
+
+1. アンサイクロペディアの記事をランダムに選びツイートする
+2. フォローするとフォローバックをする
+3. ツイートに「アンサイクロペディア」が含まれると「いいね」をする処理。
+
+## スクリプト説明
 - `ucp_twitter_bot/ucp_tweet.py`
     - アンサイクロペディアの記事をランダムに選びツイートする
 - `ucp_twitter_bot/ucp_follower.py`
-    - 自動フォローする為のプログラム
+    - フォローするとフォローバックをする処理
 - `ucp_twitter_bot/twitter_authentication.py`
-    - twitterの認証を行う。
+    - twitterの認証処理
 - `ucp_twitter_bot/ucp_favorite_tweet.py`
-    - アンサイクロペディアに言及すると「いいね」をする機能。
+    - アンサイクロペディアに言及すると「いいね」をする処理。
 - ucp_reply.py
     - Webhook(未実装)
 - ucp_streaming_reply.py
