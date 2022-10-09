@@ -11,7 +11,12 @@ SEARCH_WORD_LIST = ["アンサイクロペディア"]
 # 取得ツイート数
 TWEET_ACQUISITION_COUNT = 100
 # 以下の文章のツイートはいいねしない
-TWEET_BLACK_LIST = ["「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題"]
+TWEET_BLACK_LIST = [
+    "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題",
+    "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題",
+    "「天皇はピカチュウ」？「国民の41％はオタクで53.2％は変態？」…アンサイクロペディア英語版「Japan」の項が言いたい放題だ！",
+    "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版では「Japan」のことがカオスになってる件。。。",
+]
 # 以下のユーザーのツイートはいいねしない
 USER_BLACK_LIST = [
     "NoMiyamakiMagic",
@@ -20,6 +25,14 @@ USER_BLACK_LIST = [
     "bunsyo_bot",
     "15_ICG",
     "oppaibando",
+    "hitominpin",
+    "nagisa_1993",
+    "urako_bot",
+    "kuso_shindai",
+    "hentaigen_bot",
+    "rikadai3",
+    "A_hitler_bot",
+    "nappa__GOD",
 ]
 # いいねを付与する間隔
 SLEEP_TIME = 2
