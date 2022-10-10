@@ -55,9 +55,13 @@ class UcpTweet:
         random_pages = self.ucp_ja_client.random(pages=pages)
         print("Selected Pages : ", random_pages)
 
+        articles_list = [
+            article for article in random_pages if self._article_exists(article.title)
+        ]
+
         # 特定のカテゴリに属する記事を除外する
         articles_list = self._remove_certain_category_article_from_list(
-            random_pages, results=1
+            articles_list, results=1
         )
 
         if len(articles_list) == 0:
