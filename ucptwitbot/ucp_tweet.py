@@ -31,17 +31,17 @@ class UcpTweet:
         """
         ツイート処理
         """
-        MAX_SLEEP_TIME = 420.0
+        # MAX_SLEEP_TIME = 420.0
         N_RANDOM_PAGES = 10
 
-        sleep_random(MAX_SLEEP_TIME)
+        # sleep_random(MAX_SLEEP_TIME)
 
         trend_article = self.tweet_by_twitter_trend()
         if trend_article:
             self.tweet(trend_article, hashtags=[trend_article])
 
         random_article = self.choose_random_article(pages=N_RANDOM_PAGES)
-        if random_article:
+        if trend_article is None and random_article:
             self.tweet(random_article)
 
     def choose_random_article(self, pages: int = 10) -> Union[str, None]:
@@ -75,7 +75,7 @@ class UcpTweet:
             str : もし該当するページが見つかった場合はその記事のタイトルを返す。
                   該当する記事が見つからなかった場合はNoneを返す
         """
-        # TODO: print文が適当なので修正した方が良い
+        # TODO: print文の内容が適当なので修正した方が良い
 
         # トレンド一覧取得（地域:日本）
         trends = self.twitter_client.get_place_trends(self.JP_WOEID)[0]["trends"]
@@ -131,8 +131,7 @@ class UcpTweet:
             # Twitterの仕様として最後尾の「!」はリンクとして認識されない
             # そのパターンも除外する（例: ラブライブ!）
             url = article.url
-            if article.url.endswith("!"):
-                url = url.removesuffix("!")
+            url = url.removesuffix("!")
             if not (url in ucp_tweeted_article_links):
                 ucp_article_list.append(article)
 

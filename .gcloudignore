@@ -16,6 +16,7 @@
 node_modules
 #!include:.gitignore
 
+tmp
 ucp_get_usercontribs.py
 ucp_reply.py
 ucp_streaming_reply.py
