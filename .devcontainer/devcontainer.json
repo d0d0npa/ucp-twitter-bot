@@ -30,7 +30,7 @@
 				"python.linting.pydocstylePath": "/usr/local/bin/pydocstyle",
 				"python.linting.pylintPath": "/usr/local/bin/pylint"
 			},
-			
+
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-python.python",

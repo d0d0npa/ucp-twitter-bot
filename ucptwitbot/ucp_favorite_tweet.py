@@ -1,4 +1,3 @@
-import json
 import time
 
 import tweepy
@@ -12,7 +11,6 @@ SEARCH_WORD_LIST = ["アンサイクロペディア"]
 TWEET_ACQUISITION_COUNT = 100
 # 以下の文章のツイートはいいねしない
 TWEET_BLACK_LIST = [
-    "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題",
     "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版「Japan」の項が言いたい放題",
     "「天皇はピカチュウ」？「国民の41％はオタクで53.2％は変態？」…アンサイクロペディア英語版「Japan」の項が言いたい放題だ！",
     "「天皇はピカチュウ」「国民の41％はオタクで53.2％は変態」…アンサイクロペディア英語版では「Japan」のことがカオスになってる件。。。",
@@ -34,6 +32,11 @@ USER_BLACK_LIST = [
     "A_hitler_bot",
     "nappa__GOD",
 ]
+# 以下のソースのツイートはいいねしない
+SOURCE_BLACK_LIST = [
+    "twittbot.net",
+]
+
 # いいねを付与する間隔
 SLEEP_TIME = 2
 
@@ -56,6 +59,10 @@ def favorite_tweet():
     favorite_tweet_list = []
     for tweet in search_result:
         ok_tweet_flag = True
+        # ボット投稿はスルーする
+        for i_black in SOURCE_BLACK_LIST:
+            if tweet.source == i_black:
+                ok_tweet_flag = False
         # 意図的にボットっぽい返信をするものはスルーする
         for i_black in TWEET_BLACK_LIST:
             if tweet.text == i_black:
@@ -76,15 +83,18 @@ def favorite_tweet():
         try:
             # いいねの処理
             api.create_favorite(id=tweet.id)
-        except tweepy.errors.Forbidden as err:
+        except tweepy.errors.Forbidden:
             # いいね済の場合はForbiddenされるので、ここで例外処理を行う
-            print(err)
+            # 調べる数が多いのでerror文をprintせず、ツイート内容だけ表示
+            print("Faved Created: ", tweet.created_at)
+            print("Faved tweet: ", tweet.text)
+            time.sleep(SLEEP_TIME)
         except Exception as err:
             print(err)
             raise err
         else:
             print("Tweet_liked")
-            print(json.dumps(tweet._json, indent=2))
+            # print(json.dumps(tweet._json, indent=2))
 
             print("Created: ", tweet.created_at)
             print("user :", tweet.user.name)

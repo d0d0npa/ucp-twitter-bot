@@ -19,7 +19,7 @@ def article_created_time(title: str) -> datetime:
         "action": "query",
         "format": "json",
         "prop": "revisions",
-        "rvlimit": 100,
+        "rvlimit": "100",
         "titles": title,
         "rvprop": "timestamp",
     }
