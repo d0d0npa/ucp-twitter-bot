@@ -8,7 +8,7 @@ import os
 from flask import Flask
 from flask import request
 
-from ucp_twitter_bot import twitter_authentication
+from ucptwitbot import twitter_authentication
 
 
 api = twitter_authentication.set_authetication()

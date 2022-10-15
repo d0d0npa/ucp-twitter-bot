@@ -7,19 +7,23 @@
 ## 概要
 ボットの有する機能は以下の通り
 
-1. アンサイクロペディアの記事をランダムに選びツイートする
+1. Twitterのトレンドを基にアンサイクロペディアの記事を投稿。もし、該当する記事がなければアンサイクロペディアの記事をランダムに選びツイートする
 2. フォローするとフォローバックをする
 3. ツイートに「アンサイクロペディア」が含まれると「いいね」をする処理。
 
 ## スクリプト説明
-- `ucp_twitter_bot/ucp_tweet.py`
-    - アンサイクロペディアの記事をランダムに選びツイートする
-- `ucp_twitter_bot/ucp_follower.py`
+- `ucptwitbot/ucp_tweet.py`
+    - アンサイクロペディアの記事を選びツイートする
+- `ucptwitbot/ucp_follower.py`
     - フォローするとフォローバックをする処理
-- `ucp_twitter_bot/twitter_authentication.py`
+- `ucptwitbot/twitter_authentication.py`
     - twitterの認証処理
-- `ucp_twitter_bot/ucp_favorite_tweet.py`
+- `ucptwitbot/ucp_favorite_tweet.py`
     - アンサイクロペディアに言及すると「いいね」をする処理。
+- `ucptwitbot/utils.py`
+    - ユーティリティ。`pymediawiki`がカバーしない処理を実装。
+- `ucptwitbot/constants.py`
+    - 定数
 - ucp_reply.py
     - Webhook(未実装)
 - ucp_streaming_reply.py
@@ -32,7 +36,7 @@
 ## やりたいこと
 - [ ] 「おすすめは」と聞かれて「秀逸な記事」をランダムに返信する
 - [ ] 「新着記事は」と聞かれて「新着記事」をランダムに選び返信する
-- [ ] Twitterのトレンドを調べて、それに合わせて記事をツイートする
+- [x] Twitterのトレンドを調べて、それに合わせて記事をツイートする
 - [ ] 日替わりで特定のジャンルを紹介する
 - [ ] 日替わりで特定の利用者の記事を紹介する
 - [x] あらかじめ、どうしようもない記事とか日記を間引く
@@ -41,6 +45,9 @@
 
 
 ## ChangeLog
+### 2022 Oct 10 (v0.0.5)
+- Twitterのトレンドに合わせてアンサイクロペディアの記事を投稿する
+
 ### 2022 Oct 6 (v0.0.4)
 - アンサイクロペディアに言及した場合は「いいね」を付与する
 

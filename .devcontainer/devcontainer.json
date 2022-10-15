@@ -11,6 +11,34 @@
 		"docker-compose.yml",
 	],
 
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/bin/black",
+				"python.formatting.yapfPath": "/usr/local/bin/yapf",
+				"python.linting.banditPath": "/usr/local/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/bin/pylint"
+			},
+
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	},
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
 	"service": "dev",
@@ -32,5 +60,5 @@
 	// "postCreateCommand": "apt-get update && apt-get install -y curl",
 
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	// "remoteUser": "vscode",
 }
