@@ -4,6 +4,8 @@ flake8
 autopep8
 pytest
 pytest-cov
+mypy
 sphinx
 jupyter
 notebook
+types-requests
