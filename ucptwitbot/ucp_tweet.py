@@ -39,8 +39,7 @@ class UcpTweet:
         trend_article, hashtag = self.tweet_by_twitter_trend()
         if trend_article:
             self.tweet(trend_article, hashtags=[hashtag])
-
-        if trend_article is None:
+        else:
             random_article = self.choose_random_article()
             if random_article:
                 self.tweet(random_article)
