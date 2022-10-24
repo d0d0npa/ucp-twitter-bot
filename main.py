@@ -2,9 +2,9 @@ import base64
 
 import functions_framework
 
-from ucptwitbot import ucp_tweet
-from ucptwitbot.ucp_favorite_tweet import favorite_tweet
-from ucptwitbot.ucp_follower import following_follower_from_follower_list
+from ucptwitbot import tweet
+from ucptwitbot.favorite_tweet import favorite_tweet
+from ucptwitbot.follower import following_follower_from_follower_list
 
 
 @functions_framework.cloud_event
@@ -15,7 +15,7 @@ def function(cloud_event):
         + "!"
     )
     favorite_tweet()
-    ucp_tweet_client = ucp_tweet.UcpTweet()
+    ucp_tweet_client = tweet.UcpTweet()
     ucp_tweet_client.run()
 
 

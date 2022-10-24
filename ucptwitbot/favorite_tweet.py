@@ -35,6 +35,8 @@ USER_BLACK_LIST = [
 # 以下のソースのツイートはいいねしない
 SOURCE_BLACK_LIST = [
     "twittbot.net",
+    "Peing",
+    "Botbird tweets",
 ]
 
 # いいねを付与する間隔
