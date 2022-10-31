@@ -14,9 +14,17 @@ def function(cloud_event):
         + base64.b64decode(cloud_event.data["message"]["data"]).decode()
         + "!"
     )
-    favorite_tweet()
     ucp_tweet_client = tweet.UcpTweet()
     ucp_tweet_client.run()
+
+@functions_framework.cloud_event
+def fav(cloud_event):
+    print(
+        "Message from pub-sub, "
+        + base64.b64decode(cloud_event.data["message"]["data"]).decode()
+        + "!"
+    )
+    favorite_tweet()
 
 
 @functions_framework.cloud_event
