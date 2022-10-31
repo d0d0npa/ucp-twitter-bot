@@ -53,7 +53,8 @@ class UcpTweet:
             hashtags (List[str]): ハッシュタグのリスト
             with_image(bool): イメージを付すか
         """
-        SUMMARIZE_LENGTH_FOR_IMAGE = 100
+        # SUMMARIZE_LENGTH_FOR_IMAGE = 100
+        SUMMARIZE_SENTENCE_LENGTH_FOR_IMAGE = 5
 
         tweet_status = self.tweet_sentence(article)
 
@@ -67,17 +68,19 @@ class UcpTweet:
         # Stable diffusionでイメージを生成
         media_ids = None
         if with_image:
-            prompt = article.summarize(chars=SUMMARIZE_LENGTH_FOR_IMAGE)
+            prompt = article.summarize(sentences=SUMMARIZE_SENTENCE_LENGTH_FOR_IMAGE)
             with tempfile.TemporaryDirectory() as tmp_dir:
                 image_uri = create_image.generate_image_from_model(prompt)
-                tmp_image_path = create_image.get_image(image_uri, tmp_dir)
-                media = self.twitter_client.media_upload(filename=tmp_image_path)
-                media_ids = [media.media_id]
+                if image_uri:
+                    tmp_image_path = create_image.get_image(image_uri, tmp_dir)
+                    media = self.twitter_client.media_upload(filename=tmp_image_path)
+                    media_ids = [media.media_id]
 
             # ハッシュタグ追加
-            image_hashtags = ["aiart", "aiartwork", "AIイラスト", "StableDiffusion"]
-            for tag in image_hashtags:
-                tweet_status += f" #{tag}"
+            if media_ids:
+                image_hashtags = ["aiartwork", "AI画像", "StableDiffusion"]
+                for tag in image_hashtags:
+                    tweet_status += f" #{tag}"
 
         self.twitter_client.update_status(
             status=tweet_status, media_ids=media_ids
@@ -109,15 +112,6 @@ class UcpTweet:
             f"{article.title} {ucp_url}\n{article.summarize(chars=SUMMARIZE_LENGTH)}\n"
         )
         return tweet_status
-
-    def generate_image_from_article(
-        self,
-        article: MediaWikiPage,
-    ):
-        """
-        UCPの記事を基にイメージを生成する
-        """
-        pass
 
 
 def sleep_random(max_sleep_time: float = 420.0) -> None:

@@ -1,19 +1,30 @@
 import os
 import shutil
+from typing import Iterator
+from typing import Union
 import urllib
 
 import replicate
 import requests
 
 
-MODEL_REPOS = "rinnakk/japanese-stable-diffusion"
-
-
-def generate_image_from_model(prompt: str) -> str:
+def generate_image_from_model(prompt: str) -> Union[str, None]:
+    MODEL_REPOS = "rinnakk/japanese-stable-diffusion"
     model = replicate.models.get(MODEL_REPOS)
-    image = model.predict(prompt=prompt, num_inference_steps=50, guidance_scale=7.5)
+    try:
+        image = model.predict(
+            prompt=prompt, num_outputs=1, num_inference_steps=50, guidance_scale=7.5
+        )
+    except replicate.exceptions.ModelError:
+        return None
+    else:
+        print("Image Generation Success")
 
     return image[0]
+
+
+def generate_image_from_waifu(prompt: str) -> None:
+    pass
 
 
 def get_image(image_url: str, tmp_dir: str) -> str:
