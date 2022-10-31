@@ -30,5 +30,6 @@ gcloud functions deploy $FAV_FUNCTION_NAME \
 --region=$GCP_REGION \
 --source=. \
 --entry-point=fav \
+--timeout=540s \
 --trigger-topic=$TWEET_TOPIC_NAME \
 --env-vars-file .env.yaml
