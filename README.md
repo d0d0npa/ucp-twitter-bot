@@ -10,18 +10,23 @@
 1. Twitterのトレンドを基にアンサイクロペディアの記事を投稿。もし、該当する記事がなければアンサイクロペディアの記事をランダムに選びツイートする
 2. フォローするとフォローバックをする
 3. ツイートに「アンサイクロペディア」が含まれると「いいね」をする処理。
+4. アンサイクロペディアの文章を基にAIがイメージを生成した結果を投稿する処理。
 
 ## スクリプト説明
-- `ucptwitbot/ucp_tweet.py`
+- `ucptwitbot/tweet.py`
     - アンサイクロペディアの記事を選びツイートする
-- `ucptwitbot/ucp_follower.py`
+- `ucptwitbot/follower.py`
     - フォローするとフォローバックをする処理
 - `ucptwitbot/twitter_authentication.py`
     - twitterの認証処理
-- `ucptwitbot/ucp_favorite_tweet.py`
+- `ucptwitbot/favorite_tweet.py`
     - アンサイクロペディアに言及すると「いいね」をする処理。
-- `ucptwitbot/utils.py`
-    - ユーティリティ。`pymediawiki`がカバーしない処理を実装。
+- `ucptwitbot/utils/ucp_article_select.py`
+    - アンサイクロペディアの記事を選ぶ処理
+- `ucptwitbot/ucp/ucp_utils`
+    - `pymediawiki`がカバーしない処理を実装。
+- `ucptwitbot/utils`
+    - 今現在はAIに関係する実装を集めている
 - `ucptwitbot/constants.py`
     - 定数
 - ucp_reply.py
@@ -40,11 +45,18 @@
 - [ ] 日替わりで特定のジャンルを紹介する
 - [ ] 日替わりで特定の利用者の記事を紹介する
 - [x] あらかじめ、どうしようもない記事とか日記を間引く
-- [ ] 特定の日になると特定の話題をツイートする（例：バレンタイン、クリスマス、ハロウィン）
+- [x] 特定の日になると特定の話題をツイートする（例：バレンタイン、クリスマス、ハロウィン）
+    - トレンドを追いかけることで達成
 - [ ] UCPのスクショをとって投稿する
 
 
 ## ChangeLog
+### 2022 Nov 01 (v0.0.7)
+- いいねを行う処理とツイートを行う処理を分離した
+
+### 2022 Oct 26 (v0.0.6)
+- アンサイクロペディアの文章を基にイメージを生成した結果をツイートする
+
 ### 2022 Oct 10 (v0.0.5)
 - Twitterのトレンドに合わせてアンサイクロペディアの記事を投稿する
 
