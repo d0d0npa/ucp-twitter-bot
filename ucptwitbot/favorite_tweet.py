@@ -96,6 +96,8 @@ def favorite_tweet():
             # 本当の権限不足かは注意
             # TODO: ちゃんとしたロガーを実装する
             print("Error Message: \n", err)
+            print("user :", tweet.user.screen_name)
+            print("text :", tweet.text)
             time.sleep(SLEEP_TIME)
         except Exception as err:
             print(err)
