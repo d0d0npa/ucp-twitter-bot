@@ -24,7 +24,8 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
     && apt-get update -y \
     && apt-get install google-cloud-sdk -y
 
-RUN pip install pipenv
+# Pipの更新
+RUN pip install -U pip pipenv
 
 #Python Packageのインストール
 COPY requirements.txt /tmp
@@ -32,3 +33,5 @@ COPY requirements_dev.txt /tmp
 
 RUN pip install -r /tmp/requirements.txt
 RUN pip install -r /tmp/requirements_dev.txt
+
+# USER $USERNAME

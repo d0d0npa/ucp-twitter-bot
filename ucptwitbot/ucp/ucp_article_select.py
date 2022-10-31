@@ -1,7 +1,5 @@
 from datetime import datetime
 from datetime import timezone
-import random
-import time
 from typing import List
 from typing import Optional
 from typing import Sequence
@@ -13,12 +11,12 @@ from mediawiki.mediawikipage import MediaWikiPage
 
 from ucptwitbot import constant
 from ucptwitbot import twitter_authentication
-from ucptwitbot import utils
+from ucptwitbot.ucp import ucp_utils
 
 
-class UcpTweet:
+class UCPArticleSelectionStrategy:
     """
-    アンサイクロペディアに関することをツイートする
+    UCPの記事を選ぶアルゴリズム
     """
 
     # 日本のWOEID
@@ -28,23 +26,7 @@ class UcpTweet:
         self.twitter_client = twitter_authentication.set_authetication()
         self.ucp_ja_client = MediaWiki(url=constant.UCP_API)
 
-    def run(self):
-        """
-        ツイート処理
-        """
-        # MAX_SLEEP_TIME = 420.0
-
-        # sleep_random(MAX_SLEEP_TIME)
-
-        trend_article, hashtag = self.tweet_by_twitter_trend()
-        if trend_article:
-            self.tweet(trend_article, hashtags=[hashtag])
-        else:
-            random_article = self.choose_random_article()
-            if random_article:
-                self.tweet(random_article)
-
-    def choose_random_article(self) -> Union[str, None]:
+    def choose_random_article(self) -> Union[MediaWikiPage, None]:
         """
         アンサイクロペディアよりランダムに記事を取得する
 
@@ -73,15 +55,15 @@ class UcpTweet:
                 print("UCP article was chosen")
                 break
 
-        return str(articles_list[0].title)
+        return articles_list[0]
 
-    def tweet_by_twitter_trend(self) -> Sequence[Union[str, None]]:
+    def tweet_by_twitter_trend(self) -> Sequence[Union[MediaWikiPage, str, None]]:
         """
         Twitterのトレンド（日本）を取得し、それに合致するアンサイクロペディアの記事が
         存在した場合、その記事を返す。
 
         Returns:
-            chosen_article(str) :
+            chosen_article(MediaWikiPage) :
                 もし該当するページが見つかった場合はその記事のタイトルを返す。
                 該当する記事が見つからなかった場合はNoneを返す
             trend (str) :
@@ -125,7 +107,7 @@ class UcpTweet:
         prev_ucp_article_list = ucp_article_list
         ucp_article_list = []
         for article in prev_ucp_article_list:
-            created_datetime = utils.article_created_time(article.title)
+            created_datetime = ucp_utils.article_created_time(article.title)
             time_passed = datetime.now(timezone.utc) - created_datetime
             if time_passed.days > 0:
                 ucp_article_list.append(article)
@@ -148,40 +130,10 @@ class UcpTweet:
             print("UCP article already tweeted")
             return None, None
 
-        chosen_article = ucp_article_list[0].title
-        trend = trend_ucp_article_dict[chosen_article]
+        chosen_article = ucp_article_list[0]
+        trend = trend_ucp_article_dict[chosen_article.title]
 
-        return (str(chosen_article), str(trend))
-
-    def tweet(self, article: str, hashtags: Optional[List[str]] = None) -> None:
-        """
-        該当記事をツイートする
-
-        Args:
-            article (str): ツイートするアンサイクロペディアの記事
-            hashtags (List[str]): ハッシュタグのリスト
-        """
-        # リンク先URLを取得する
-        open_search_result = self.ucp_ja_client.opensearch(article, results=1)
-        ucp_url = open_search_result[0][2]
-        print("open search Result : ", ucp_url)
-
-        page = self.ucp_ja_client.page(article)
-
-        tweet_status = f"{page.title} {ucp_url}\n{page.summarize(chars=60)}\n"
-
-        if hashtags:
-            for tag in hashtags:
-                tag = tag.removesuffix("!")
-                tweet_status += f" #{tag}"
-
-        print("Tweet : ", tweet_status)
-
-        # TODO: 画像の取得
-        # print("Images : ", page.images[0])
-        # api.update_with_media(status=tweet_status, filename = page.images[0])
-        self.twitter_client.update_status(status=tweet_status)  # Twitterに投稿
-        print("ツイート成功")
+        return (chosen_article, str(trend))
 
     def _remove_certain_category_article_from_list(
         self,
@@ -292,11 +244,3 @@ class UcpTweet:
             if not (url in ucp_tweeted_article_links):
                 result_article.append(article)
         return result_article
-
-
-def sleep_random(max_sleep_time: float = 420.0) -> None:
-    """uniformな確率で処理を一時停止する（投稿時間をランダムにするため）"""
-    sleep_time = random.uniform(0, max_sleep_time)
-    sleep_time = round(sleep_time, 3)
-    print("sleep time : ", sleep_time)
-    time.sleep(sleep_time)

@@ -9,3 +9,5 @@ sphinx
 jupyter
 notebook
 types-requests
+Pillow
+websockets
