@@ -91,6 +91,12 @@ def favorite_tweet():
             print("Faved Created: ", tweet.created_at)
             print("Faved tweet: ", tweet.text)
             time.sleep(SLEEP_TIME)
+        except tweepy.errors.Unauthorized as err:
+            # ブロックされた場合Unauthorizedと出るので例外処理を行う
+            # 本当の権限不足かは注意
+            # TODO: ちゃんとしたロガーを実装する
+            print("Error Message: \n", err)
+            time.sleep(SLEEP_TIME)
         except Exception as err:
             print(err)
             raise err
