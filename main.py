@@ -17,6 +17,7 @@ def function(cloud_event):
     ucp_tweet_client = tweet.UcpTweet()
     ucp_tweet_client.run()
 
+
 @functions_framework.cloud_event
 def fav(cloud_event):
     print(

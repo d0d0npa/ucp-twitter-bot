@@ -1,0 +1,17 @@
+tox
+black
+flake8
+autopep8
+pytest
+pytest-cov
+mypy
+sphinx
+jupyter
+notebook
+types-requests
+selenium
+webdriver-manager
+scipy
+ftfy
+transformers
+git+https://github.com/rinnakk/japanese-stable-diffusion
